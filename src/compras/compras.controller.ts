@@ -122,4 +122,14 @@ export class ComprasController {
     return this.comprasService.deleteCompra(idCompra);
   }
 
+    @Get('productos-mas-comprados')
+    @ApiOperation({
+      summary: 'Reporte de productos más comprados',
+      description: 'Devuelve los productos más comprados por cantidad total en las compras registradas',
+    })
+    @ApiQuery({ name: 'limit', required: false, type: Number, example: 10 })
+    getProductosMasComprados(@Query('limit', new DefaultValuePipe(10), ParseIntPipe) limit: number) {
+      return this.comprasService.getProductosMasComprados(limit);
+    }
+
 }
