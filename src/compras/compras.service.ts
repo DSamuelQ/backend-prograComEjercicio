@@ -169,6 +169,24 @@ export class ComprasService {
       relations: ['proveedor', 'usuario', 'detalles', 'detalles.producto'],
     });
   }
+
+
+  async getComprasPorProveedor(idProveedor: number, fechaInicio?: Date, fechaFin?: Date) {
+    const where: any = {
+      proveedor: { idProveedor },
+      estado: 1,
+    };
+    if (fechaInicio && fechaFin) {
+      where.fechaCompra = Between(fechaInicio, fechaFin);
+    } else if (fechaInicio) {
+      where.fechaCompra = Between(fechaInicio, new Date());
+    }
+    return await this.comprasRepository.find({
+      where,
+      relations: ['proveedor', 'usuario', 'detalles', 'detalles.producto'],
+    });
+  }
+
    
     async getProductosMasComprados(limit: number = 10) {
       const result = await this.detalleCompraRepository
@@ -184,4 +202,5 @@ export class ComprasService {
         .getRawMany();
       return result;
     }
+
 }

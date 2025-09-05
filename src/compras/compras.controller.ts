@@ -11,6 +11,7 @@ import { JwtAuthGuard } from '../auth/guards/jwt-auth.guard';
 export class ComprasController {
   constructor(private readonly comprasService: ComprasService) {}
   
+
   @Get('reporte')
   @ApiOperation({
     summary: 'Obtener reporte de compras por rango de fechas',
@@ -25,9 +26,29 @@ export class ComprasController {
     return this.comprasService.getComprasPorFechas(new Date(fechaInicio), new Date(fechaFin));
   }
 
+  @Get('reporte-proveedor')
+  @ApiOperation({
+    summary: 'Obtener reporte de compras por proveedor listo',
+    description: 'Este endpoint devuelve las compras realizadas a un proveedor específico, opcionalmente en un rango de fechas',
+  })
+  @ApiQuery({ name: 'idProveedor', type: Number, required: true })
+  @ApiQuery({ name: 'fechaInicio', type: String, required: false })
+  @ApiQuery({ name: 'fechaFin', type: String, required: false })
+  getReporteComprasPorProveedor(
+    @Query('idProveedor', ParseIntPipe) idProveedor: number,
+    @Query('fechaInicio') fechaInicio?: string,
+    @Query('fechaFin') fechaFin?: string,
+  ) {
+    return this.comprasService.getComprasPorProveedor(
+      idProveedor,
+      fechaInicio ? new Date(fechaInicio) : undefined,
+      fechaFin ? new Date(fechaFin) : undefined,
+    );
+  }
+
   @Get()
   @ApiOperation({
-    summary: 'Para listar todas las compras con paginación',
+    summary: 'Para listar todas las compras con paginación ',
     description: 'Este endpoint sirve para obtener todas las compras registradas',
   })
   @ApiQuery({
@@ -48,6 +69,8 @@ export class ComprasController {
   ) {
     return this.comprasService.getAllCompras(page, limit);
   }
+
+  
 
   @Get(':idCompra')
   @ApiOperation({

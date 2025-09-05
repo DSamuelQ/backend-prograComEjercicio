@@ -6,10 +6,10 @@ Este es el servicio de gestión de inventario para e-commerce, desarrollado en N
 
 ## Autores
 
-- **Alexander Bollen** – backend developer
-- **María Rojas** – backend developer
-- **Samuel Quijivix** – backend developer
-- **Santiago López** – backend developer
+- **Alexander Bollen** – full-stack development
+- **María Rojas** – full-stack development
+- **Samuel Quijivix** – full-stack development
+- **Santiago López** – full-stack development
 
 ---
 
