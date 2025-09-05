@@ -6,9 +6,10 @@ Este es el servicio de gestión de inventario para e-commerce, desarrollado en N
 
 ## Autores
 
-- **Miguel García** – backend developer
-- **Javier García** – backend developer
+- **Alexander Bollen** – backend developer
+- **María Rojas** – backend developer
 - **Samuel Quijivix** – backend developer
+- **Santiago López** – backend developer
 
 ---
 
