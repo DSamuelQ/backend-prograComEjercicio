@@ -28,7 +28,7 @@ export class ComprasController {
 
   @Get('reporte-proveedor')
   @ApiOperation({
-    summary: 'Obtener reporte de compras por proveedor',
+    summary: 'Obtener reporte de compras por proveedor listo',
     description: 'Este endpoint devuelve las compras realizadas a un proveedor específico, opcionalmente en un rango de fechas',
   })
   @ApiQuery({ name: 'idProveedor', type: Number, required: true })
@@ -48,7 +48,7 @@ export class ComprasController {
 
   @Get()
   @ApiOperation({
-    summary: 'Para listar todas las compras con paginación',
+    summary: 'Para listar todas las compras con paginación ',
     description: 'Este endpoint sirve para obtener todas las compras registradas',
   })
   @ApiQuery({
