@@ -170,6 +170,7 @@ export class ComprasService {
     });
   }
 
+
   async getComprasPorProveedor(idProveedor: number, fechaInicio?: Date, fechaFin?: Date) {
     const where: any = {
       proveedor: { idProveedor },
@@ -185,4 +186,21 @@ export class ComprasService {
       relations: ['proveedor', 'usuario', 'detalles', 'detalles.producto'],
     });
   }
+
+   
+    async getProductosMasComprados(limit: number = 10) {
+      const result = await this.detalleCompraRepository
+        .createQueryBuilder('detalle')
+        .leftJoin('detalle.producto', 'producto')
+        .select('producto.idProducto', 'idProducto')
+        .addSelect('producto.nombreProducto', 'nombreProducto')
+        .addSelect('SUM(detalle.cantidadCompra)', 'cantidadTotalComprada')
+        .groupBy('producto.idProducto')
+        .addGroupBy('producto.nombreProducto')
+        .orderBy('cantidadTotalComprada', 'DESC')
+        .limit(limit)
+        .getRawMany();
+      return result;
+    }
+
 }
